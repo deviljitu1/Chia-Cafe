@@ -2131,20 +2131,21 @@ a.video-play-btn {
 .story-img-left img, .story-img-right img {
   border-radius: 12px;
   width: 100%;
-  object-fit: cover;
+  height: auto;
+  display: block;
   box-shadow: 0 8px 24px rgba(0,0,0,0.1);
 }
 
 .story-img-top {
-  height: 220px;
+  /* Let height be natural to prevent cutting */
 }
 
 .story-img-bottom {
-  height: 165px;
+  /* Let height be natural to prevent cutting */
 }
 
 .story-img-tall {
-  height: 400px;
+  /* Let height be natural to prevent cutting */
 }
 
 .story-text {
