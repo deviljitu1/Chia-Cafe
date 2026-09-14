@@ -1057,7 +1057,7 @@ a.video-play-btn {
 }
 
 a.video-play-btn:hover {
-  background-color: #0E4935;
+  background-color: #84A57B;
   color: #fff;
 }
 
@@ -2060,7 +2060,7 @@ p.testimonial-body {
 ----------------------------------------------------------------------------- */
 a.video-play-btn {
   position: absolute;
-  background-color: #84A57B;
+  background-color: #0E4935;
   color: #fff;
   width: 90px;
   height: 90px;
