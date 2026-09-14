@@ -1057,8 +1057,8 @@ a.video-play-btn {
 }
 
 a.video-play-btn:hover {
-  background-color: #333;
-  color: #0E4935;
+  background-color: #0E4935;
+  color: #fff;
 }
 
 .latest-news-bg {
