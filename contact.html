@@ -5,9 +5,9 @@
 <meta charset="utf-8"/>
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Chia Cafe Premium Template" name="description"/>
+<meta content="Contact Chia Cafe in Raipur — plan a celebration, ask about our menu, or simply say hello. We'd love to hear from you." name="description"/>
 <!-- title -->
-<title>Chia Cafe</title>
+<title>Contact Us – Chia Cafe</title>
 <!-- favicon -->
 <link href="assets/img/favicon.png" rel="shortcut icon" type="image/png"/>
 <!-- google font -->
@@ -47,7 +47,7 @@
 <!-- logo -->
 <div class="site-logo">
 <a href="index.html">
-<img alt="" src="assets/img/logo.webp"/>
+<img alt="Chia Cafe" src="assets/img/logo.webp"/>
 </a>
 </div>
 <!-- logo -->
@@ -81,7 +81,7 @@
 </div>
 </div>
 </div>
-<!-- end search arewa -->
+<!-- end search area -->
 <!-- breadcrumb-section -->
 <div class="breadcrumb-section contact-bg">
 <div class="container">
@@ -96,58 +96,147 @@
 </div>
 </div>
 <!-- end breadcrumb section -->
-<!-- contact form -->
+
+<!-- ===================== CONTACT SECTION ===================== -->
 <div class="contact-from-section mt-150 mb-150">
 <div class="container">
-<div class="row">
-<div class="col-lg-8 mb-5 mb-lg-0">
-<div class="form-title">
-<h2>Get in <span class="orange-text">Touch</span></h2>
-<p>Whether you have a question about our menu, want to plan a celebration, or simply want to say hello, we are here to help.</p>
+<div class="row align-items-start">
+
+  <!-- LEFT: Form -->
+  <div class="col-lg-7 mb-5 mb-lg-0">
+    <div class="contact-form-panel">
+      <div class="form-title mb-4">
+        <span class="contact-tag">Get in Touch</span>
+        <h2 class="mt-2">Send Us a <span class="orange-text">Message</span></h2>
+        <p>Whether you have a question about our menu, want to plan a celebration, or simply want to say hello — we are here to help. We typically respond within a few hours.</p>
+      </div>
+
+      <div id="form_status"></div>
+
+      <div class="contact-form">
+        <form id="chiacafe-contact" onsubmit="return valid_datas(this);" method="POST">
+
+          <div class="cf-row">
+            <div class="cf-group">
+              <label for="name"><i class="fas fa-user"></i> Your Name <span class="req">*</span></label>
+              <input id="name" name="name" placeholder="e.g. Rahul Sharma" type="text" autocomplete="name"/>
+            </div>
+            <div class="cf-group">
+              <label for="email"><i class="fas fa-envelope"></i> Email Address <span class="req">*</span></label>
+              <input id="email" name="email" placeholder="e.g. rahul@gmail.com" type="email" autocomplete="email"/>
+            </div>
+          </div>
+
+          <div class="cf-row">
+            <div class="cf-group">
+              <label for="phone"><i class="fas fa-phone"></i> Phone Number</label>
+              <input id="phone" name="phone" placeholder="e.g. 09155515655" type="tel" autocomplete="tel"/>
+            </div>
+            <div class="cf-group">
+              <label for="subject"><i class="fas fa-tag"></i> Subject <span class="req">*</span></label>
+              <select id="subject" name="subject">
+                <option value="" disabled selected>Select a reason…</option>
+                <option value="General Enquiry">General Enquiry</option>
+                <option value="Celebration &amp; Event Planning">Celebration &amp; Event Planning</option>
+                <option value="Table Reservation">Table Reservation</option>
+                <option value="Menu Question">Menu Question</option>
+                <option value="Feedback">Feedback</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="cf-group">
+            <label for="message"><i class="fas fa-comment-alt"></i> Your Message <span class="req">*</span></label>
+            <textarea id="message" name="message" placeholder="Tell us about your celebration, ask about a dish, or just say hello…" rows="6"></textarea>
+          </div>
+
+          <input name="token" type="hidden" value="FsWga4&amp;@f6aw"/>
+
+          <button class="cf-submit-btn" type="submit">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+
+        </form>
+      </div><!-- end contact-form -->
+    </div>
+  </div>
+
+  <!-- RIGHT: Info Cards -->
+  <div class="col-lg-5">
+    <div class="contact-info-panel">
+
+      <div class="contact-info-card">
+        <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <div class="ci-body">
+          <h5>Visit Us</h5>
+          <p>
+            <a href="https://www.google.com/maps/search/Global+Enclave,+near+Vijay+Nagar+Chowk,+Avanti+Vihar,+Sector+2,+Shankar+Nagar,+Raipur,+Chhattisgarh+492001" target="_blank">
+              Global Enclave, near Vijay Nagar Chowk,<br>
+              Avanti Vihar, Sector 2, Shankar Nagar,<br>
+              Raipur, Chhattisgarh 492001
+            </a>
+          </p>
+          <a class="ci-link" href="https://www.google.com/maps/search/Chia+Cafe+Shankar+Nagar+Raipur" target="_blank">
+            <i class="fas fa-directions"></i> Get Directions
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-info-card">
+        <div class="ci-icon"><i class="fas fa-phone-alt"></i></div>
+        <div class="ci-body">
+          <h5>Call Us</h5>
+          <p><a href="tel:09155515655">091555 15655</a></p>
+          <span class="ci-note">Available during cafe hours</span>
+        </div>
+      </div>
+
+      <div class="contact-info-card">
+        <div class="ci-icon"><i class="far fa-clock"></i></div>
+        <div class="ci-body">
+          <h5>Opening Hours</h5>
+          <p>Monday – Sunday<br><strong>Open until 12:00 AM (Midnight)</strong></p>
+          <span class="ci-note">We're open every day 🎉</span>
+        </div>
+      </div>
+
+      <div class="contact-info-card">
+        <div class="ci-icon"><i class="fas fa-birthday-cake"></i></div>
+        <div class="ci-body">
+          <h5>Plan a Celebration</h5>
+          <p>Birthdays, get-togethers, small parties — we offer customized celebration packages with music &amp; game combos.</p>
+          <span class="ci-note">Call or fill the form to book</span>
+        </div>
+      </div>
+
+      <!-- Order Online -->
+      <div class="contact-order-online">
+        <p class="ci-label">Order Online via</p>
+        <div class="ci-delivery-btns">
+          <a href="https://www.swiggy.com/city/raipur/chia-cafe-shankar-nagar-rest1391785" target="_blank" class="ci-del-btn swiggy-btn">
+            <img src="assets/img/swiggy-logo.svg" alt="Swiggy" height="26">
+          </a>
+          <a href="https://www.zomato.com/raipur/chia-cafe-1-shankar-nagar" target="_blank" class="ci-del-btn zomato-btn">
+            <img src="assets/img/zomato-logo.svg" alt="Zomato" height="26">
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </div>
-<div id="form_status"></div>
-<div class="contact-form">
-<form id="chiacafe-contact" onsubmit="return valid_datas( this );" type="POST">
-<p>
-<input id="name" name="name" placeholder="Name" type="text"/>
-<input id="email" name="email" placeholder="Email" type="email"/>
-</p>
-<p>
-<input id="phone" name="phone" placeholder="Phone" type="tel"/>
-<input id="subject" name="subject" placeholder="Subject" type="text"/>
-</p>
-<p><textarea cols="30" id="message" name="message" placeholder="Message" rows="10"></textarea></p>
-<input name="token" type="hidden" value="FsWga4&amp;@f6aw"/>
-<p><input type="submit" value="Submit"/></p>
-</form>
 </div>
 </div>
-<div class="col-lg-4">
-<div class="contact-form-wrap">
-<div class="contact-form-box">
-<h4><i class="fas fa-map"></i> Shop <span class="orange-text">Address</span></h4>
-<p><a href="https://www.google.com/maps/search/Global+Enclave,+near+Vijay+Nagar+Chowk,+Avanti+Vihar,+Sector+2,+Shankar+Nagar,+Raipur,+Chhattisgarh+492001" target="_blank" style="color: inherit; transition: 0.3s;" onmouseover="this.style.color='#0E4935'" onmouseout="this.style.color='inherit'">Global Enclave, near Vijay Nagar Chowk,<br>Avanti Vihar, Sector 2, Shankar Nagar,<br>Raipur, Chhattisgarh 492001</a></p>
-</div>
-<div class="contact-form-box">
-<h4><i class="far fa-clock"></i> Shop <span class="orange-text">Hours</span></h4>
-<p>EVERYDAY: Open until 12:00 AM</p>
-</div>
-<div class="contact-form-box">
-<h4><i class="fas fa-address-book"></i> <span class="orange-text">Contact</span></h4>
-<p>Phone: <a href="tel:09155515655" style="color: inherit; transition: 0.3s;" onmouseover="this.style.color='#0E4935'" onmouseout="this.style.color='inherit'">091555 15655</a></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- end contact form -->
+<!-- end contact section -->
+
 <!-- find our location -->
 <div class="find-location blue-bg">
 <div class="container">
 <div class="row">
 <div class="col-lg-12 text-center">
-<p> <i class="fas fa-map-marker-alt"></i> Find Our Location</p>
+<p><i class="fas fa-map-marker-alt"></i> Find Our Location</p>
 </div>
 </div>
 </div>
@@ -155,7 +244,10 @@
 <!-- end find our location -->
 <!-- google map section -->
 <div class="embed-responsive embed-responsive-21by9">
-<iframe allowfullscreen="" class="embed-responsive-item" frameborder="0" height="450" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d118991.60337341855!2d81.56477028163013!3d21.261895689104043!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a28dda4475dba11%3A0xea68f90edda64e3c!2sChia%20Cafe!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" style="border:0;" width="600"></iframe>
+<iframe allowfullscreen="" class="embed-responsive-item" frameborder="0" height="450"
+  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d118991.60337341855!2d81.56477028163013!3d21.261895689104043!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a28dda4475dba11%3A0xea68f90edda64e3c!2sChia%20Cafe!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+  style="border:0;" width="600">
+</iframe>
 </div>
 <!-- end google map section -->
 <!-- footer -->
@@ -180,7 +272,6 @@
 <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
 <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
 <li><a href="#" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-<li><a href="#" target="_blank"><i class="fab fa-dribbble"></i></a></li>
 </ul>
 </div>
 </div>
@@ -210,9 +301,12 @@
 <script src="assets/js/form-validate.js"></script>
 <!-- main js -->
 <script src="assets/js/main.js"></script>
+<!-- scroll animations -->
+<script src="assets/js/scroll-animations.js"></script>
 <!-- Floating Contact Button -->
 <a href="tel:09155515655" class="floating-contact-btn">
 <i class="fas fa-phone-alt"></i> Contact Us
 </a>
 </body>
+
 </html>

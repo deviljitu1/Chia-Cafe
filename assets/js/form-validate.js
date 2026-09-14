@@ -1,42 +1,58 @@
-function valid_datas( f ){
-	
-	if( f.name.value == '' ){
-		jQuery('#form_status').html('<span class="wrong">Your name must not be empty!</span>');
-		notice( f.name );
-	}else if( f.email.value == '' ){
-		jQuery('#form_status').html('<span class="wrong">Your email must not be empty and correct format!</span>');
-		notice( f.email );
-	//}else if( f.phone.value == '' ){
-		//jQuery('#form_status').html('<span class="wrong">Your phone must not be empty and correct format!</span>');
-		//notice( f.phone );
-	}else if( f.subject.value == '' ){
-		jQuery('#form_status').html('<span class="wrong">Your subject must not be empty!</span>');
-		notice( f.subject );
-	}else if( f.message.value == '' ){
-		jQuery('#form_status').html('<span class="wrong">Your message must not be empty!</span>');
-		notice( f.message );
-	}else{
-		 jQuery.ajax({
-			url: 'mail.php',
-			type: 'post',
-			data: jQuery('form#chiacafe-contact').serialize(),
-			complete: function(data) {
-				jQuery('#form_status').html(data.responseText);
-				jQuery('#chiacafe-contact').find('input,textarea').attr({value:''});
-				jQuery('#chiacafe-contact').css({opacity:1});
-				jQuery('#chiacafe-contact').remove();
-			}
-		});
-		jQuery('#form_status').html('<span class="loading">Sending your message...</span>');
-		jQuery('#chiacafe-contact').animate({opacity:0.3});
-		jQuery('#chiacafe-contact').find('input,textarea,button').css('border','none').attr({'disabled':''});
-	}
-	
-	return false;
+function valid_datas( f ) {
+
+  // Clear previous status
+  jQuery('#form_status').html('');
+
+  // Validate Name
+  if ( f.name.value.trim() === '' ) {
+    jQuery('#form_status').html('<span class="wrong"><i class="fas fa-exclamation-circle"></i> Please enter your name.</span>');
+    highlight( f.name );
+    return false;
+  }
+
+  // Validate Email
+  var emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if ( f.email.value.trim() === '' || !emailReg.test(f.email.value.trim()) ) {
+    jQuery('#form_status').html('<span class="wrong"><i class="fas fa-exclamation-circle"></i> Please enter a valid email address.</span>');
+    highlight( f.email );
+    return false;
+  }
+
+  // Validate Subject (dropdown)
+  if ( f.subject.value === '' ) {
+    jQuery('#form_status').html('<span class="wrong"><i class="fas fa-exclamation-circle"></i> Please select a subject.</span>');
+    highlight( f.subject );
+    return false;
+  }
+
+  // Validate Message
+  if ( f.message.value.trim() === '' ) {
+    jQuery('#form_status').html('<span class="wrong"><i class="fas fa-exclamation-circle"></i> Please write a message before sending.</span>');
+    highlight( f.message );
+    return false;
+  }
+
+  // All good — submit via AJAX
+  jQuery.ajax({
+    url: 'mail.php',
+    type: 'POST',
+    data: jQuery('form#chiacafe-contact').serialize(),
+    complete: function(data) {
+      jQuery('#form_status').html(data.responseText);
+      jQuery('#chiacafe-contact').find('input, textarea, select, button').prop('disabled', false).css({ opacity: 1 });
+      jQuery('#chiacafe-contact').slideUp(400);
+    }
+  });
+
+  // Show loading state
+  jQuery('#form_status').html('<span class="loading"><i class="fas fa-spinner fa-spin"></i> Sending your message…</span>');
+  jQuery('#chiacafe-contact').find('input, textarea, select, button').prop('disabled', true).css({ opacity: 0.5 });
+
+  return false;
 }
 
-function notice( f ){
-	jQuery('#chiacafe-contact').find('input,textarea').css('border','none');
-	f.style.border = '1px solid red';
-	f.focus();
+function highlight( field ) {
+  jQuery('#chiacafe-contact').find('input, textarea, select').css('border-color', '');
+  jQuery(field).css('border-color', '#e74c3c');
+  jQuery(field).focus();
 }
