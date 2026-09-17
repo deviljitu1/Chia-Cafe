@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Disallow non-public pages
+Disallow: /mail.php
+
+# Sitemap location
+Sitemap: https://chiacafe.in/sitemap.xml

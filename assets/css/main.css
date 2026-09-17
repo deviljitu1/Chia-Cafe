@@ -1492,6 +1492,15 @@ input[type="submit"] {
   height: 100%;
 }
 
+/* Prevent slider CLS on mobile before Owl Carousel loads */
+.homepage-slider:not(.owl-carousel) {
+  overflow: hidden;
+  min-height: 100vh;
+}
+.homepage-slider:not(.owl-carousel) .single-homepage-slider:not(:first-child) {
+  display: none;
+}
+
 .homepage-slider div {
   height: 100%;
 }
