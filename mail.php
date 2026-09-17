@@ -14,7 +14,7 @@
   $message = htmlspecialchars( strip_tags( $_POST['message'] ) );
 
   // === CHANGE THIS EMAIL to the cafe's real email ===
-  $to = 'chiacaferaipur@gmail.com';
+  $to = 'chiacafe.in@gmail.com';
 
   // Email headers
   $headers  = "MIME-Version: 1.0\r\n";
