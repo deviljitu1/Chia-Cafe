@@ -1,32 +1,34 @@
 <?php
 
-  // Basic token security check
-  if( empty( $_POST['token'] ) || $_POST['token'] != 'FsWga4&@f6aw' ){
-    echo '<div class="cf-error"><i class="fas fa-times-circle"></i> Security check failed. Please reload and try again.</div>';
-    exit;
-  }
+// Basic token security check
+if (empty($_POST['token']) || $_POST['token'] != 'FsWga4&@f6aw') {
+  echo '<div class="cf-error"><i class="fas fa-times-circle"></i> Security check failed. Please reload and try again.</div>';
+  exit;
+}
 
-  // Sanitize inputs
-  $name    = htmlspecialchars( strip_tags( $_POST['name'] ) );
-  $from    = htmlspecialchars( strip_tags( $_POST['email'] ) );
-  $phone   = htmlspecialchars( strip_tags( $_POST['phone'] ) );
-  $subject = htmlspecialchars( strip_tags( $_POST['subject'] ) );
-  $message = htmlspecialchars( strip_tags( $_POST['message'] ) );
+// Sanitize inputs
+$name = htmlspecialchars(strip_tags($_POST['name']));
+$from = htmlspecialchars(strip_tags($_POST['email']));
+$phone = htmlspecialchars(strip_tags($_POST['phone']));
+$subject = htmlspecialchars(strip_tags($_POST['subject']));
+$message = htmlspecialchars(strip_tags($_POST['message']));
 
-  // === CHANGE THIS EMAIL to the cafe's real email ===
-  $to = 'chiacafe.in@gmail.com';
+// === CHANGE THIS EMAIL to the cafe's real email ===
+$to = 'chiacafe.in@gmail.com';
 
-  // Email headers
-  $headers  = "MIME-Version: 1.0\r\n";
-  $headers .= "Content-type: text/html; charset=UTF-8\r\n";
-  $headers .= "From: Chia Cafe Website <noreply@chiacafe.in>\r\n";
-  $headers .= "Reply-To: $from\r\n";
+// Require PHPMailer classes
+require 'PHPMailer/Exception.php';
+require 'PHPMailer/PHPMailer.php';
+require 'PHPMailer/SMTP.php';
 
-  // Email subject line
-  $email_subject = "[Chia Cafe Contact] $subject — from $name";
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-  // Email body (HTML)
-  $body = '
+// Email subject line
+$email_subject = "[Chia Cafe Contact] $subject — from $name";
+
+// Email body (HTML)
+$body = '
   <!DOCTYPE html>
   <html>
   <head><meta charset="UTF-8"><style>
@@ -50,27 +52,51 @@
         <p>You received a new contact form submission from your website.</p>
       </div>
       <div class="body">
-        <div class="field"><div class="label">👤 Name</div><div class="value">'.ucwords($name).'</div></div>
-        <div class="field"><div class="label">📧 Email</div><div class="value"><a href="mailto:'.($from).'" style="color:#0E4935;">'.($from).'</a></div></div>
-        <div class="field"><div class="label">📞 Phone</div><div class="value">'.( $phone ? $phone : '—' ).'</div></div>
-        <div class="field"><div class="label">📌 Subject</div><div class="value">'.$subject.'</div></div>
+        <div class="field"><div class="label">👤 Name</div><div class="value">' . ucwords($name) . '</div></div>
+        <div class="field"><div class="label">📧 Email</div><div class="value"><a href="mailto:' . ($from) . '" style="color:#0E4935;">' . ($from) . '</a></div></div>
+        <div class="field"><div class="label">📞 Phone</div><div class="value">' . ($phone ? $phone : '—') . '</div></div>
+        <div class="field"><div class="label">📌 Subject</div><div class="value">' . $subject . '</div></div>
         <div class="field">
           <div class="label">💬 Message</div>
-          <div class="msg-box">'.nl2br($message).'</div>
+          <div class="msg-box">' . nl2br($message) . '</div>
         </div>
       </div>
-      <div class="footer">This email was sent from the contact form on chiacafe.in &nbsp;|&nbsp; Reply directly to this email to reach '.$name.'</div>
+      <div class="footer">This email was sent from the contact form on chiacafe.in &nbsp;|&nbsp; Reply directly to this email to reach ' . $name . '</div>
     </div>
   </body>
   </html>';
 
-  // Send the email
-  $sent = mail( $to, $email_subject, $body, $headers );
+// Send the email using PHPMailer
+$mail = new PHPMailer(true);
 
-  if( $sent ){
-    echo '<div class="cf-success"><i class="fas fa-check-circle"></i><div><strong>Message sent!</strong><br>Thank you ' . ucfirst($name) . ', we\'ll get back to you soon 🌿</div></div>';
-  } else {
-    echo '<div class="cf-error"><i class="fas fa-exclamation-circle"></i><div><strong>Something went wrong.</strong><br>Please call us at <a href="tel:09155515655">091555 15655</a> or try again.</div></div>';
-  }
+try {
+  // Server settings
+  $mail->isSMTP();
+  $mail->Host = 'smtp.gmail.com';
+  $mail->SMTPAuth = true;
+
+  // === IMPORTANT: ENTER YOUR GMAIL ADDRESS AND APP PASSWORD HERE ===
+  $mail->Username = 'chiacafe.in@gmail.com';
+  $mail->Password = 'YOUR_GOOGLE_APP_PASSWORD_HERE';
+  // =================================================================
+
+  $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+  $mail->Port = 465;
+
+  // Recipients
+  $mail->setFrom('chiacafe.in@gmail.com', 'Chia Cafe Website');
+  $mail->addAddress($to);
+  $mail->addReplyTo($from, $name);
+
+  // Content
+  $mail->isHTML(true);
+  $mail->Subject = $email_subject;
+  $mail->Body = $body;
+
+  $mail->send();
+  echo '<div class="cf-success"><i class="fas fa-check-circle"></i><div><strong>Message sent!</strong><br>Thank you ' . ucfirst($name) . ', we\'ll get back to you soon 🌿</div></div>';
+} catch (Exception $e) {
+  echo '<div class="cf-error"><i class="fas fa-exclamation-circle"></i><div><strong>Something went wrong.</strong><br>Please call us at <a href="tel:09155515655">091555 15655</a> or try again.<br><small style="font-size:10px; opacity:0.5;">Mailer Error: {$mail->ErrorInfo}</small></div></div>';
+}
 
 ?>
